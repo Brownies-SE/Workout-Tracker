@@ -23,10 +23,10 @@ router.put("/api/workouts/:id", (req, res) => {
     }
   )
     .then((dbWorkout) => {
-      res.status(200).json(dbWorkout);
+      res.json(dbWorkout);
     })
     .catch((err) => {
-      res.status(400).json(err);
+      res.json(err);
     });
 });
 
