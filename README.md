@@ -3,7 +3,7 @@
 Using this Full Stack application, a user can interact with my fitness tracker online to:
 
 - `Add and complete workouts as the user goes along`
-- `Reveive feedback about the stats of their current workout`
+- `Receive feedback about the stats of their current workout`
 - `Browse their dashbaord to see graphs of the duration of each workout`
 - `Browse their dashbaord to see the weight the use has been lifting`
 
