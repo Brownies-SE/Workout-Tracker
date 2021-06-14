@@ -32,8 +32,11 @@ router.get("/api/workouts", (req, res) => {
       totalDuration: { $sum: "$exercises.duration" },
     })
     .then((dbWorkout) => {
-      console.log(dbWorkout);
+      console.log("Did we get here", dbWorkout);
       res.json(dbWorkout);
+    })
+    .catch((err) => {
+      res.status(400).json(err);
     });
 });
 
@@ -43,7 +46,7 @@ router.get("/api/workouts/range", (req, res) => {
       totalDuration: { $sum: "$exercises.duration" },
     })
     .limit(7)
-    .sort({ _id: 1 })
+    .sort({ _id: -1 })
     .then((dbWorkout) => {
       res.status(200).json(dbWorkout);
     })
