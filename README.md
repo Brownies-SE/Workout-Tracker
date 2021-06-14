@@ -18,7 +18,7 @@ Using this Full Stack application, a user can interact with my fitness tracker o
 
 # Installation
 
-No installation necessary, visit our website here:
+No installation necessary, visit my website here: https://floating-atoll-99700.herokuapp.com/?id=60c7c57b5529cd0015f4b06f
 
 # Technologies
 
