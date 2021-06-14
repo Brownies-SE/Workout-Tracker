@@ -27,23 +27,23 @@ router.put("/api/workouts/:id", (req, res) => {
 });
 
 router.get("/api/workouts", (req, res) => {
-  db.Workout.find()
-    .then((dbWorkout) => {
-      res.json(dbWorkout);
+  db.Workout.aggregate()
+    .addFields({
+      totalDuration: { $sum: "$exercises.duration" },
     })
-    .catch((err) => {
-      res.json(err);
+    .then((dbWorkout) => {
+      console.log(dbWorkout);
+      res.json(dbWorkout);
     });
 });
 
 router.get("/api/workouts/range", (req, res) => {
-  console.log("in the range get");
   db.Workout.aggregate()
     .addFields({
       totalDuration: { $sum: "$exercises.duration" },
     })
     .limit(7)
-    .sort({ _id: -1 })
+    .sort({ _id: 1 })
     .then((dbWorkout) => {
       res.status(200).json(dbWorkout);
     })
