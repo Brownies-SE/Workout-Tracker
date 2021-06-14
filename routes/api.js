@@ -12,16 +12,12 @@ router.post("/api/workouts", (req, res) => {
 });
 
 router.put("/api/workouts/:id", (req, res) => {
-  const id = req.params.id;
-  const body = req.body;
-  db.Workout.updateOne(
-    { _id: id },
-    {
-      $push: {
-        exercises: { ...body },
-      },
-    }
+  db.Workout.findByIdAndUpdate(
+    req.params.id,
+    { $push: { exercises: req.body } },
+    { new: true }
   )
+
     .then((dbWorkout) => {
       res.json(dbWorkout);
     })
@@ -41,13 +37,19 @@ router.get("/api/workouts", (req, res) => {
 });
 
 router.get("/api/workouts/range", (req, res) => {
-  db.Workout.find({})
+  console.log("in the range get");
+  db.Workout.aggregate()
+    .addFields({
+      totalDuration: { $sum: "$exercises.duration" },
+    })
     .limit(7)
+    .sort({ _id: -1 })
     .then((dbWorkout) => {
-      res.json(dbWorkout);
+      res.status(200).json(dbWorkout);
     })
     .catch((err) => {
-      res.json(err);
+      res.status(400).json(err);
     });
 });
+
 module.exports = router;
